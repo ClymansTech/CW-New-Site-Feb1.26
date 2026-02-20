@@ -1,0 +1,2365 @@
+:root {
+  --solar-bg: #020617;
+  --solar-primary: #10b981; /* Construction Green */
+  --solar-accent: #f59e0b; /* Caution Orange */
+  --solar-text-high: #ffffff;
+  --solar-text-mid: #94a3b8;
+  --industrial-steel: #1e293b;
+  --radius-zero: 0px;
+  --transition: all 0.3s ease-in-out;
+  --red: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+/* APPLYING THE BLUEPRINT GRID INTERNALLY */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  line-height: 1.6;
+  color: var(--solar-text-mid);
+  background: var(--solar-bg);
+  background-image:
+    linear-gradient(rgba(16, 185, 129, 0.15) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.15) 1.5px, transparent 1.5px);
+  background-size: 50px 50px;
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--solar-text-high);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.caution-strip {
+  height: 15px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--solar-accent),
+    var(--solar-accent) 20px,
+    #000 20px,
+    #000 40px
+  );
+  width: 100%;
+  border-bottom: 2px solid #000;
+}
+
+section {
+  padding: 10rem 1.5rem;
+  position: relative;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  /* Slight transparency to show the blueprint grid through the section */
+  background: rgba(2, 6, 23, 0.9);
+}
+
+#problem {
+  background: none;
+  background-image:
+    linear-gradient(rgba(16, 185, 129, 0.35) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.35) 1.5px, transparent 1.5px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.steel-frame {
+  border: 12px solid var(--industrial-steel);
+  outline: 2px solid var(--solar-primary);
+  position: relative;
+  box-shadow: 25px 25px 0px rgba(0, 0, 0, 0.6);
+}
+
+.steel-frame::after {
+  position: absolute;
+  bottom: -35px;
+  left: 0;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--solar-primary);
+  letter-spacing: 2px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  background: var(--solar-accent);
+  color: #000;
+  padding: 1.2rem 2.8rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 3px solid #000;
+  position: relative;
+  transition: var(--transition);
+  box-shadow: 6px 6px 0px var(--solar-primary);
+}
+
+.btn:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 10px 10px 0px #fff !important;
+  background: #fff !important;
+  color: #000 !important;
+  border: 3px solid #000 !important;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  /*gap: 5rem;*/
+  align-items: center;
+}
+
+.hero-tag {
+  background: var(--solar-primary);
+  color: #000;
+  padding: 0.5rem 1rem;
+  font-weight: 900;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+}
+
+/*Trying hero img background*/
+/* --- HERO BACKGROUND IMAGE + OVERLAY SYSTEM --- */
+#hero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background image (very subtle) */
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("imgs/Gemini_Generated_Image_9d0sak9d0sak9d0s.png"); /* 👈 CHANGE IMAGE HERE */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 1.22; /* 👈 controls how visible the image is */
+  filter: grayscale(70%) contrast(1.2) brightness(1.1);
+
+  z-index: 0;
+}
+
+/* Dark overlay (controls mood / readability) */
+#hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(2, 6, 23, 0.75),
+    rgba(2, 6, 23, 0.9)
+  );
+  z-index: 1;
+}
+
+/* Ensure hero content stays on top */
+#hero .container {
+  position: relative;
+  z-index: 2;
+}
+/*END trying hero img background*/
+
+/* --- MEASURING TAPE SECTION (FIXED FOR RESPONSIVENESS) --- */
+.comparison-wrapper {
+  position: relative;
+  margin-top: 5rem;
+  z-index: 5;
+  cursor: crosshair;
+}
+
+.comparison-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  position: relative;
+}
+
+.comparison-wrapper:hover .ruler-overlay {
+  transform: translate(-48%, -55%) rotate(0deg) scale(1.05);
+}
+
+.compare-card {
+  padding: 2.5rem;
+  border: 2px solid var(--industrial-steel);
+  background: #000;
+  position: relative;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.card-label {
+  font-size: 0.7rem;
+  font-weight: 900;
+  padding: 4px 12px;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+/* --- NEW SPEC SHEET LAYOUT --- */
+.spec-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.spec-header h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.spec-header p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--solar-text-mid);
+}
+
+.spec-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.price-hero-box {
+  grid-column: 1 / -1;
+  background: var(--industrial-steel);
+  border: 2px solid var(--solar-primary);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.price-val {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--solar-accent);
+  line-height: 1;
+}
+
+.spec-column {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0;
+}
+
+.spec-item {
+  display: flex;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  min-height: 80px;
+}
+
+.spec-item:last-child {
+  border-bottom: none;
+}
+
+.spec-tag {
+  width: 120px;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--solar-primary);
+  font-weight: 900;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  padding-left: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.spec-desc {
+  padding: 1.5rem;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.phase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.phase-card {
+  border-left: 6px solid var(--solar-primary);
+  background: var(--industrial-steel);
+  padding: 2rem;
+  transition: var(--transition);
+}
+
+.phase-card:hover {
+  background: var(--solar-primary);
+}
+
+.phase-card:hover h3,
+.phase-card:hover p {
+  color: #000;
+}
+/* --- THE INDUSTRIAL HEADER --- */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.main-nav {
+  background: rgba(2, 6, 23, 0.55);
+  backdrop-filter: blur(10px);
+  border-bottom: none;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+}
+
+/* --- LOGO & LIVE SIGNAL --- */
+.logo {
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -1px;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-shadow: 2px 2px 0px #000; /* Industrial stamp effect */
+  text-decoration: none; /* removes underline */
+}
+
+.logo span {
+  color: var(--solar-primary);
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--solar-primary);
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-shadow: 0 0 10px var(--solar-primary);
+}
+
+/* The Pulse Effect */
+.status-dot::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--solar-primary);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* --- NAV LINKS --- */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #000; /* Industrial stamp effect */
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--solar-primary);
+  transform: translateY(-1px);
+}
+
+/* --- NAV LINKS --- */
+.nav-links a:hover {
+  color: var(--solar-primary);
+  transform: translateY(-1px);
+}
+
+/* MODIFY THIS PART BELOW */
+.nav-btn {
+  background: var(--solar-primary) !important;
+  color: #000 !important;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0px #000;
+  text-shadow: none !important;
+  margin-left: 8px;
+  transition: var(--transition); /* Ensures smooth animation */
+}
+
+/* ADD THIS NEW HOVER RULE */
+.nav-btn:hover {
+  background: #fff !important; /* Changes background to white */
+
+  transform: scale(1.1) !important; /* Scales up like the FB icon */
+  box-shadow: 6px 6px 0px #000; /* Optional: deepens shadow on hover */
+}
+
+/* --- CAUTION STRIP --- */
+.caution-strip {
+  height: 14px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--solar-accent),
+    var(--solar-accent) 20px,
+    #000 20px,
+    #000 40px
+  );
+  width: 100%;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+
+/* MOBILE TOGGLE STYLES */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger {
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background: var(--solar-primary);
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: var(--solar-primary);
+  left: 0;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+.hamburger::after {
+  bottom: -8px;
+}
+
+/* --- MOBILE TWEAKS --- */
+@media (max-width: 900px) {
+  .nav-links {
+    position: fixed;
+    top: 75px; /* Adjust based on your header height */
+    right: -100%;
+    background: var(--solar-bg);
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    padding: 3rem;
+    border-top: 2px solid var(--industrial-steel);
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  /* 1. Reset padding for mobile so it's not a huge 10rem gap */
+  section {
+    padding: 5rem 1.5rem;
+  }
+
+  /* 2. Stack the hero grid and center text */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center; /* Centers the H1 and Tag */
+    gap: 3rem;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the buttons and max-width paragraph */
+  }
+
+  /* 3. Move the image above the text for mobile flow */
+  .hero-visual {
+    order: -1;
+    width: 100%;
+    max-width: 500px; /* Keeps the image from getting too huge on tablets */
+    margin: 0 auto;
+  }
+
+  /* 4. Fix the button container centering */
+  .hero-content div[style*="display: flex"] {
+    justify-content: center;
+  }
+
+  /* Existing Spec/Comparison Fixes */
+  .spec-grid-layout,
+  .comparison-box {
+    grid-template-columns: 1fr;
+  }
+  .price-hero-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  .ruler-overlay {
+    display: none;
+  }
+}
+
+.authority-quote {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url(https://images.unsplash.com/photo-1635424710928-0544e8512efe?auto=format&fit=crop&q=80&w=1200);
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 8rem 2rem;
+  text-align: center;
+  border-top: 4px solid var(--solar-primary);
+  border-bottom: 4px solid var(--solar-primary);
+}
+
+/*--added toggle--*/
+/* Everything inside this bracket ONLY happens on screens smaller than 900px */
+@media (max-width: 1001px) {
+  .nav-toggle {
+    display: block;
+    z-index: 1001;
+    position: relative;
+  }
+
+  .nav-links {
+    /* These styles now only apply to mobile */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 55vh;
+    background: var(--solar-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    /* This is what was hiding your desktop menu! */
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease;
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-links li {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  .nav-links.active li {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/*--end toggle--*/
+
+/* --- Added Styling for the Social Icon --- */
+.social-link i {
+  font-size: 1.2rem;
+  color: var(--solar-primary); /* Keeps the construction green theme */
+  transition: var(--transition);
+}
+
+.social-link:hover i {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Ensuring the icon aligns well in the mobile menu */
+@media (max-width: 900px) {
+  .nav-links li:last-child {
+    margin-top: 1rem; /* Space between the button and the icon on mobile */
+  }
+}
+
+@media (max-width: 421px) {
+  .logo {
+    font-size: 1.1rem;
+  }
+}
+/* 1. OVERLAY & DYNAMIC PADDING */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* 🔑 DEFAULT: hidden */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease;
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* 2. THE INDUSTRIAL CASE */
+.tablet-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px; /* Desktop width */
+  background: #2a2a2a;
+  padding: 40px 20px; /* Default Bezel */
+  border-radius: 45px;
+  box-shadow:
+    inset 0 0 20px #000,
+    0 0 0 6px #333,
+    0 0 0 12px #1a1a1a,
+    0 30px 60px rgba(0, 0, 0, 0.8);
+  border: 1px solid #444;
+  transition: transform 0.8s cubic-bezier(0.5, -0.5, 0.1, 1.4);
+}
+
+/* 3. MOBILE SPECIFIC ADJUSTMENTS (The Fix) */
+@media (max-width: 600px) {
+  .modal-overlay {
+    padding: 10px; /* Tighter safety margin on mobile */
+  }
+  .tablet-container {
+    padding: 30px 15px; /* Thinner bezel on mobile to save space */
+    border-radius: 35px;
+    max-width: 100%;
+  }
+  .tablet-screen {
+    height: 65vh !important; /* Slightly shorter screen for mobile phones */
+  }
+  .form-content {
+    padding: 20px 15px !important; /* Less internal padding so text doesn't squish */
+  }
+  .status-led {
+    right: 40px !important; /* Move LED so it doesn't float off */
+  }
+}
+
+/* 4. THE SCREEN (Height Fix) */
+.tablet-screen {
+  background: #000;
+  border-radius: 6px;
+  border: 8px solid #0a0a0a;
+  height: 70vh; /* Scales based on screen height */
+  max-height: 550px; /* Prevents it from getting too long on huge monitors */
+  overflow-y: auto;
+  animation: powerOn 1.4s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes powerOn {
+  0% {
+    background: #000;
+  }
+  15% {
+    background: #1a1a1a;
+  }
+  20% {
+    background: #000;
+  }
+  100% {
+    background: #ffffff;
+  }
+}
+
+/* 5. FORM CONTENT */
+.form-content {
+  padding: 35px;
+  font-family: "Segoe UI", sans-serif;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #666;
+  text-transform: uppercase;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 2px solid #eee;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 18px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 25px;
+  box-shadow: 0 5px 0 #8b0000;
+  cursor: pointer;
+}
+
+/* LED & HARDWARE DETAILS */
+.status-led {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #5eff5e 0%, #008000 100%);
+  box-shadow: 0 0 5px #00ff00;
+  animation: pulse-green 2s infinite;
+}
+@keyframes pulse-green {
+  0%,
+  100% {
+    box-shadow: 0 0 2px #00ff00;
+  }
+  50% {
+    box-shadow: 0 0 15px #00ff00;
+  }
+}
+
+.home-button {
+  width: 35px;
+  height: 35px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 50%;
+  margin: 15px auto 0;
+}
+
+/* EXIT STATE */
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.is-hidden .tablet-container {
+  transform: translateY(120vh) rotate(10deg);
+}
+#notLong {
+  color: var(--solar-accent);
+}
+
+/*cookies popup*/
+/* COOKIE CONSENT STYLING */
+.cookie-consent {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.cookie-consent.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cookie-consent button {
+  background: var(--solar-accent);
+  color: #000;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cookie-consent button:hover {
+  transform: scale(1.05);
+}
+/*cookies ends*/
+
+/*trying before and after section*/
+/* --- FIELD REPORT / BEFORE & AFTER SECTION --- */
+.field-report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.report-card {
+  position: relative;
+  background: var(--industrial-steel);
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  padding: 1rem;
+  transition: var(--transition);
+}
+
+.report-card1 {
+  position: relative;
+  background: var(--industrial-steel);
+  border: 2px solid red;
+  padding: 1rem;
+  transition: var(--transition);
+}
+
+.report-card:hover {
+  border-color: var(--solar-primary);
+  transform: translateY(-5px);
+}
+
+.report-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #000;
+  aspect-ratio: 16/9;
+}
+
+.report-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  filter: grayscale(100%) contrast(1.2);
+  transition: var(--transition);
+}
+
+/*#afterWebsite {
+        
+        object-position: top; /* <--- ADD THIS LINE *
+      }*/
+
+.report-card:hover img {
+  filter: grayscale(0%) contrast(1);
+}
+
+.stamp {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 0.5rem 1rem;
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  transform: rotate(15deg);
+  border: 4px solid;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.stamp-before {
+  color: var(--red);
+  border-color: var(--red);
+  opacity: 0.8;
+}
+
+.stamp-after {
+  color: var(--solar-primary);
+  border-color: var(--solar-primary);
+  background: rgba(2, 6, 23, 0.8);
+}
+
+.report-details {
+  margin-top: 1.5rem;
+  padding: 0 1rem 1rem;
+}
+
+.report-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .field-report-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/*end of new before and after test*/
+
+/*keep mobile screens from disallowing grid background*/
+@media (max-width: 900px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 900px) {
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(16, 185, 129, 0.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(16, 185, 129, 0.18) 1px, transparent 1px);
+    background-size: 16px 16px;
+    z-index: 0;
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/*Trying trust banner*/
+/* --- AUTHORITY STRIP (GOOGLE / YELP) --- */
+.authority-strip {
+  padding: 2.2rem 1.5rem;
+  background: rgba(2, 6, 23, 0.95);
+  border-top: 1px solid rgba(16, 185, 129, 0.25);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.authority-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.authority-label {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--solar-text-mid);
+}
+
+.authority-logos {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.authority-logos img {
+  height: 34px;
+  opacity: 0.75;
+  filter: brightness(1.4);
+  transition: var(--transition);
+}
+
+.authority-logos img:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1.2);
+}
+
+/* Mobile refinement */
+@media (max-width: 600px) {
+  .authority-strip-inner {
+    gap: 1.5rem;
+  }
+
+  .authority-logos img {
+    height: 18px;
+  }
+}
+/*trust banner END*/
+
+/*landing page section starts*/
+/* --- PRICE PLATE --- */
+.price-plate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--industrial-steel);
+  border: 3px solid var(--solar-primary);
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 10px 10px 0 #000;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.price-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--solar-primary);
+}
+
+.price-plate h3 {
+  font-size: 4rem;
+  color: var(--solar-accent);
+  line-height: 1;
+}
+
+.price-right {
+  text-align: right;
+}
+
+.price-sub {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* --- VALUE STRIP --- */
+.value-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.value-card {
+  background: rgba(16, 185, 129, 0.08);
+  border-left: 5px solid var(--solar-primary);
+  padding: 1.8rem;
+}
+
+.value-card h4 {
+  color: #fff;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.value-card p {
+  font-size: 0.9rem;
+  color: var(--solar-text-mid);
+}
+
+/* --- CONDENSED SPECS --- */
+.spec-grid-layout.condensed {
+  margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+  .price-plate {
+    text-align: center;
+  }
+
+  .price-right {
+    text-align: center;
+  }
+}
+
+/* --- PRICE PLATE SCROLL ANIMATION --- */
+.price-plate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+
+.price-plate.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   PRICE PLATE — MICRO INTERACTIONS + SCROLL AUTHORITY
+   (ADD-ON ONLY — DOES NOT MODIFY EXISTING RULES)
+========================================================= */
+
+/* Subtle confidence nudge on price */
+.price-plate h3 {
+  transition: transform 0.25s ease;
+}
+
+.price-plate:hover h3 {
+  transform: scale(1.03);
+}
+
+/* CTA = signed work order feedback */
+.price-plate .btn {
+  position: relative;
+}
+
+.price-plate .btn::after {
+  content: "✓";
+  position: absolute;
+  right: -28px;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  font-weight: 900;
+}
+
+.price-plate .btn:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* =========================================================
+   VALUE STRIP — TOOL-HEAD FEEDBACK (SUBTLE LIFT)
+========================================================= */
+
+.value-card {
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-4px);
+  background: rgba(16, 185, 129, 0.14);
+}
+
+/* =========================================================
+   MOBILE-FIRST CONVERSION TIGHTENING
+========================================================= */
+
+@media (max-width: 600px) {
+  /* Price plate = stacked + thumb-ready */
+  .price-plate {
+    padding: 2rem 1.5rem;
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  .price-plate h3 {
+    font-size: 3.2rem;
+  }
+
+  .price-right {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .price-plate .btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 1.4rem;
+  }
+
+  .price-sub {
+    margin-top: 0.75rem;
+    font-size: 0.7rem;
+  }
+
+  /* Specs read faster, scroll less */
+  .spec-item {
+    min-height: auto;
+  }
+
+  .spec-desc {
+    padding: 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .spec-tag {
+    width: 90px;
+    font-size: 0.65rem;
+  }
+}
+/*Landing page section ends*/
+/*Full website section starts again*/
+/* =========================================================
+   FULL WEBSITE SECTION — VISUAL POLISH
+========================================================= */
+
+.full-build {
+  background: #000;
+  padding: 0;
+}
+
+/* Header bar */
+.frame-header {
+  background: var(--industrial-steel);
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid var(--solar-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.frame-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+/* Spec refinements */
+.full-specs {
+  padding: 2.5rem;
+  gap: 0;
+}
+
+.spec-desc .muted {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* CTA footer */
+.frame-footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.frame-footer h3 {
+  margin-bottom: 0.75rem;
+}
+
+.price-context {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+/* Buttons */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--solar-primary);
+  color: var(--solar-primary);
+}
+
+.btn-outline:hover {
+  background: var(--solar-primary);
+  color: #000;
+}
+
+/* Mobile tightening */
+@media (max-width: 600px) {
+  .full-specs {
+    padding: 2rem 1.5rem;
+  }
+
+  .frame-footer {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .frame-header {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .frame-header .btn {
+    width: 100%;
+  }
+}
+
+/* CTA footer heading spacing fix */
+.frame-footer h3 {
+  line-height: 1.35; /* adds vertical breathing room */
+  letter-spacing: 0.5px; /* subtle industrial spacing */
+  max-width: 680px; /* prevents long single-line crunch */
+  margin: 0 auto 1rem; /* centers + adds bottom space */
+}
+
+/*Full website section ends again*/
+
+/* =========================================================
+   GLOBAL OVERRIDES & UTILITIES
+========================================================= */
+
+.accent {
+  color: var(--solar-primary);
+}
+
+.muted {
+  opacity: 0.7;
+}
+
+/* =========================================================
+   PRICE PLATE — SCROLL + MICRO-INTERACTIONS
+========================================================= */
+
+.price-plate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+
+.price-plate.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.price-plate h3 {
+  transition: transform 0.25s ease;
+}
+
+.price-plate:hover h3 {
+  transform: scale(1.03);
+}
+
+/* CTA confirmation feedback */
+.price-plate .btn {
+  position: relative;
+}
+
+.price-plate .btn::after {
+  content: "";
+  position: absolute;
+  right: -28px;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  font-weight: 900;
+}
+
+.price-plate .btn:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* =========================================================
+   VALUE CARDS — TOOL-HEAD FEEDBACK
+========================================================= */
+
+.value-card {
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-4px);
+  background: rgba(16, 185, 129, 0.14);
+}
+
+/* =========================================================
+   FULL WEBSITE SECTION — STRUCTURE & POLISH
+========================================================= */
+
+.full-website {
+  background: rgba(16, 185, 129, 0.05);
+  background-image: url();
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right top;
+}
+
+.full-build {
+  background: #000;
+  padding: 0;
+}
+
+/* Header bar */
+.frame-header {
+  background: var(--industrial-steel);
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid var(--solar-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.frame-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+/* Spec grid refinements */
+.full-specs {
+  padding: 2.5rem;
+  gap: 0;
+}
+
+.spec-desc .muted {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+}
+
+/* CTA footer */
+.frame-footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.frame-footer h3 {
+  line-height: 1.35;
+  letter-spacing: 0.5px;
+  max-width: 680px;
+  margin: 0 auto 1rem;
+}
+
+.price-context {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+/* Buttons */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--solar-primary);
+  color: var(--solar-primary);
+}
+
+.btn-outline:hover {
+  background: var(--solar-primary);
+  color: #000;
+}
+
+/* =========================================================
+   INDUSTRIAL POPUP / TERMINAL RESKIN
+========================================================= */
+
+/* Tablet → Terminal alias */
+.tablet-container,
+.terminal-container {
+  background: linear-gradient(145deg, #0f172a, #020617);
+  border-radius: 0;
+  border: 4px solid var(--industrial-steel);
+  outline: 2px solid var(--solar-primary);
+  box-shadow:
+    18px 18px 0 #000,
+    inset 0 0 30px rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  max-width: 560px;
+  position: relative;
+  transform-origin: center;
+}
+
+/* Remove consumer tablet elements */
+.home-button {
+  display: none;
+}
+
+/* Terminal header stripe */
+.tablet-container::before {
+  content: "FIELD TERMINAL — SECURE INPUT";
+  position: absolute;
+  top: -28px;
+  left: 0;
+  background: var(--industrial-steel);
+  color: var(--solar-primary);
+  padding: 6px 14px;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  border: 1px solid var(--solar-primary);
+}
+
+/* Screen panel */
+.tablet-screen {
+  background: #020617 !important;
+  border-radius: 0;
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  max-height: 520px;
+  animation: terminalBoot 0.9s ease-out forwards;
+}
+
+@keyframes terminalBoot {
+  from {
+    opacity: 0;
+    filter: contrast(0.5);
+  }
+  to {
+    opacity: 1;
+    filter: contrast(1);
+  }
+}
+
+/* Status LED */
+.status-led {
+  width: 10px;
+  height: 10px;
+  background: var(--solar-primary);
+  box-shadow: 0 0 12px var(--solar-primary);
+}
+
+/* Form content */
+.form-content {
+  padding: 2rem;
+}
+
+.form-content h2 {
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+.form-content p {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Inputs */
+input,
+textarea {
+  background: #020617;
+  border: 2px solid var(--industrial-steel);
+  border-radius: 0;
+  color: #fff;
+  font-weight: 600;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--solar-primary);
+}
+
+/* Labels */
+label {
+  color: var(--solar-primary);
+  letter-spacing: 2px;
+  font-size: 0.65rem;
+}
+
+/* Submit button */
+.submit-btn {
+  background: var(--solar-accent);
+  color: #000;
+  font-weight: 900;
+  letter-spacing: 2px;
+  border: 3px solid #000;
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--solar-primary);
+  transition: var(--transition);
+}
+
+.submit-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 #fff;
+  background: #fff;
+}
+
+/* Exit animation */
+.is-hidden .tablet-container,
+.is-hidden .terminal-container {
+  transform: translateY(140vh) rotate(6deg);
+}
+
+/* =========================================================
+   MOBILE-FIRST TIGHTENING
+========================================================= */
+
+/* =========================================================
+   POPUP / TERMINAL — INDUSTRIAL UPGRADE WITH ANIMATED STRIPES
+========================================================= */
+
+/* 1. OVERLAY */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease;
+}
+
+/* 1a. Active state */
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* 2. HAZARD STRIPE BACKGROUND — ANIMATED */
+.modal-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.65) 0px,
+    rgba(0, 0, 0, 0.65) 24px,
+    rgba(255, 199, 44, 0.35) 24px,
+    rgba(255, 199, 44, 0.35) 48px
+  );
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Animate the stripes diagonally */
+  background-size: 48px 48px;
+  animation: stripe-move 8s linear infinite;
+}
+
+@keyframes stripe-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 48px 48px;
+  }
+}
+
+/* 3. TERMINAL CASE */
+.tablet-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  background: #2a2a2a;
+  padding: 40px 20px;
+  border-radius: 45px;
+  box-shadow:
+    inset 0 0 20px #000,
+    0 0 0 6px #333,
+    0 0 0 12px #1a1a1a,
+    0 30px 60px rgba(0, 0, 0, 0.8);
+  border: 1px solid #444;
+  transition: transform 0.8s cubic-bezier(0.5, -0.5, 0.1, 1.4);
+  z-index: 1; /* above stripe */
+}
+
+/* Optional stamp for flair */
+.tablet-container::after {
+  content: "CONTRACTOR ACCESS ONLY";
+  position: absolute;
+  /*bottom: -18px;*/
+  right: 12px;
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  opacity: 0.5;
+}
+
+/* 4. SCREEN */
+.tablet-screen {
+  background: #000;
+  border-radius: 6px;
+  border: 8px solid #0a0a0a;
+  height: 70vh;
+  max-height: 550px;
+  overflow-y: auto;
+  animation: powerOn 1.4s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+/* POWER ON ANIMATION */
+@keyframes powerOn {
+  0% {
+    background: #000;
+  }
+  15% {
+    background: #1a1a1a;
+  }
+  20% {
+    background: #000;
+  }
+  100% {
+    background: #ffffff;
+  }
+}
+
+/* 5. FORM CONTENT */
+.form-content {
+  padding: 35px;
+  font-family: "Segoe UI", sans-serif;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #666;
+  text-transform: uppercase;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 2px solid #eee;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 18px;
+  background: var(--solar-accent);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 25px;
+  box-shadow: 0 5px 0 #8b0000;
+  cursor: pointer;
+}
+
+/* 6. STATUS LED */
+.status-led {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #5eff5e 0%, #008000 100%);
+  box-shadow: 0 0 5px #00ff00;
+  animation: pulse-green 2s infinite;
+}
+@keyframes pulse-green {
+  0%,
+  100% {
+    box-shadow: 0 0 2px #00ff00;
+  }
+  50% {
+    box-shadow: 0 0 15px #00ff00;
+  }
+}
+
+/* 7. HOME BUTTON */
+.home-button {
+  width: 35px;
+  height: 35px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 50%;
+  margin: 15px auto 0;
+}
+
+/* 8. EXIT ANIMATION */
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.is-hidden .tablet-container {
+  transform: translateY(120vh) rotate(10deg);
+}
+
+/* 9. MOBILE ADJUSTMENTS */
+@media (max-width: 600px) {
+  .modal-overlay {
+    padding: 10px;
+  }
+  .tablet-container {
+    padding: 30px 15px;
+    border-radius: 35px;
+    max-width: 100%;
+  }
+  .tablet-screen {
+    height: 65vh !important;
+  }
+  .form-content {
+    padding: 20px 15px !important;
+  }
+  .status-led {
+    right: 40px !important;
+  }
+}
+
+.project-type {
+  margin: 15px 0;
+  font-size: 14px;
+  color: #668;
+}
+
+.project-type label {
+  display: block;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.project-type input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* ==============================
+   Project Type Radio Buttons
+   Scoped for #tabletOverlay
+   ============================== */
+#tabletOverlay .project-type {
+  margin: 15px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Each card-like radio option */
+#tabletOverlay .radio-card {
+  display: inline-flex; /* align input + text inline */
+  align-items: center; /* vertical alignment */
+  margin-right: 12px; /* space between cards */
+  padding: 10px 15px; /* card padding */
+  border: 2px solid #ccc; /* light border */
+  border-radius: 8px; /* rounded edges */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none; /* prevent text highlight on click */
+}
+
+/* Hide the default radio button */
+#tabletOverlay .radio-card input[type="radio"] {
+  display: none;
+}
+
+/* Text inside the card */
+#tabletOverlay .radio-card span {
+  display: inline-block;
+}
+
+/* Highlight the selected option */
+#tabletOverlay .radio-card input[type="radio"]:checked + span {
+  background-color: #00ff00; /* site red */
+  color: #fff; /* white text */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Hover effect on card */
+#tabletOverlay .radio-card:hover {
+  border-color: #00ff00; /* subtle red border on hover */
+}
+/* =========================================================
+   PROCESS SECTION — PARALLAX EFFECT & LCP OPTIMIZED
+========================================================= */
+#process {
+  position: relative;
+  background-image: url("imgs/RoofingSunset.png"); /* 👈 CHANGE IMAGE */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* Parallax */
+  background-attachment: fixed;
+
+  /* Overlay for readability */
+  background-color: rgba(0, 0, 0, 0.55);
+  background-blend-mode: overlay;
+
+  padding: 10rem 1.5rem;
+  color: var(--solar-text-high);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+
+  /* LCP optimization: promote to its own layer */
+  transform: translateZ(0);
+  will-change: transform, background-position;
+  z-index: 0;
+}
+
+#process .container {
+  position: relative;
+  z-index: 2; /* ensures text/content is on top */
+}
+
+/* Mobile fix — parallax breaks on iOS & some Android, fallback to scroll */
+@media (max-width: 900px) {
+  #process {
+    background-attachment: scroll;
+    padding: 5rem 1.5rem;
+  }
+}
+
+/* =========================================================
+   FULL WEBSITE SPEC CARDS — MODULAR LAYOUT
+========================================================= */
+
+.fw-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.6rem;
+}
+
+/* Card */
+.fw-spec-card {
+  background: linear-gradient(
+    145deg,
+    rgba(30, 41, 59, 0.85),
+    rgba(15, 23, 42, 0.85)
+  );
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 1.6rem;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.fw-spec-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Header */
+.fw-spec-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Tag */
+.fw-spec-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  color: var(--solar-primary);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+/* Title */
+.fw-spec-card h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: #fff;
+}
+
+/* Body text */
+.fw-spec-card p {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Mobile refinement */
+@media (max-width: 480px) {
+  .fw-spec-card {
+    padding: 1.3rem;
+  }
+}
+
+/* Specifically target only the 'After' website image */
+#afterWebsite img {
+  object-position: top center !important;
+}
+/*NEW LANDING PAGE CARDS LAYOUT AND STYLE*/
+/* =========================================================
+   CATAPULT LANDING PAGE — CONVERSION REBUILD
+   Scoped: #spec-sheet ONLY
+========================================================= */
+
+/* =========================================================
+   $500 LANDING PAGE — DOWNSELL STYLE
+   Purpose: Simple, intentional, limited
+========================================================= */
+
+/* -----------------------------------------
+   VALUE STRIP — SOFTER, LESS PROMOTIONAL
+----------------------------------------- */
+#spec-sheet .value-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+#spec-sheet .value-card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.4rem;
+  border-radius: 6px;
+}
+
+#spec-sheet .value-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+#spec-sheet .value-card p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* -----------------------------------------
+   TECH SPECS — FLAT, CLEAN, SKIMMABLE
+----------------------------------------- */
+#spec-sheet .spec-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+#spec-sheet .spec-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Each feature = simple row */
+#spec-sheet .spec-item {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1.2rem 1.3rem;
+  border-radius: 6px;
+}
+
+/* Small, quiet label */
+#spec-sheet .spec-tag {
+  background: none;
+  padding: 0;
+  margin-bottom: 0.3rem;
+  font-size: 0.65rem;
+  letter-spacing: 1.6px;
+  color: var(--solar-accent);
+}
+
+/* Short, readable description */
+#spec-sheet .spec-desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #e5e7eb;
+}
+
+/* -----------------------------------------
+   MOBILE — STACKED & BREATHABLE
+----------------------------------------- */
+@media (max-width: 900px) {
+  #spec-sheet .value-strip {
+    grid-template-columns: 1fr;
+  }
+
+  #spec-sheet .spec-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*NEW LANDING PAGE STYLE AND LAYOUT END*/
+
+/*HARD HAT on "Landing Page" starts*/
+/* Title baseline */
+.spec-title {
+  position: relative;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+/* Anchor the letter */
+.letter-e {
+  position: relative;
+  display: inline-block;
+}
+
+/* Hard hat positioning */
+.hard-hat {
+  position: absolute;
+  top: -18%; /* ⬇ lowered */
+  right: -55%; /* ➡ pushed right */
+
+  width: 0.9em;
+  transform: rotate(12deg);
+  filter: drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+}
+@keyframes hat-wobble {
+  0%,
+  100% {
+    transform: rotate(12deg);
+  }
+  50% {
+    transform: rotate(9deg);
+  }
+}
+
+.hard-hat {
+  animation: hat-wobble 2s ease-in-out infinite;
+}
+
+/*Hat on "Landing Page" ends*/
+.project-type {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/*Why trust us starts*/
+
+/* Container Grid */
+.industrial-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+/* Individual Card */
+.industrial-card {
+  background-color: #1a1a1a; /* dark steel */
+  border: 2px solid #333;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  position: relative;
+}
+
+/* Top accent bar */
+.card-top-bar {
+  width: 60px;
+  height: 5px;
+  background-color: #f59e0b;
+  margin-bottom: 1rem;
+}
+
+/* Icon styling */
+.card-icon {
+  margin-bottom: 0.8rem;
+}
+
+/* Card hover effect */
+.industrial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Card headings */
+.industrial-card h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  font-family: "Arial Black", sans-serif;
+  text-transform: uppercase;
+}
+
+/* Card text */
+.industrial-card p {
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .industrial-cards {
+    gap: 1.5rem;
+  }
+  .industrial-card {
+    padding: 1rem;
+  }
+}
+/*Why trust us ends*/
+
+/*Background change for Full Site section starts*/
+/* 1. Target the section and prepare it for the overlay */
+#full-website {
+  position: relative; /* Essential for the background to stay inside */
+  z-index: 1; /* Ensures content stays above the background */
+  overflow: hidden;
+
+  /* This solid color acts as a 'shield' against the body background */
+  background-color: #111;
+
+  /* Ensure text remains readable */
+  color: #ffffff;
+}
+
+/* 2. Create the shingle background layer */
+#full-website::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* Path to your shingle image */
+  background-image: url("imgs/Blue\ Shingles.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* ADJUST TRANSPARENCY HERE (0.1 to 1.0) */
+  opacity: 0.2;
+
+  /* Keeps this layer behind the text/cards */
+  z-index: -1;
+}
+
+/* 3. Optional: Ensure your container/grid sits clearly on top */
+#full-website .container {
+  position: relative;
+  z-index: 2;
+}
+/*Background change for Full Site section ends*/
+
+/*Background change for "Why trust us" starts*/
+/* --- WHY TRUST US — BACKGROUND IMAGE + OVERLAY --- */
+#why-trust-us {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background image */
+#why-trust-us::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: url("imgs/Blue\ Shingles.png"); /* 👈 change */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: grayscale(60%) contrast(1.15);
+  z-index: 0;
+}
+
+/* Dark industrial overlay */
+#why-trust-us::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(2, 6, 23, 0.8); /* blocks body grid */
+  z-index: 1;
+}
+
+/* Lift content above overlays */
+#why-trust-us .container {
+  position: relative;
+  z-index: 2;
+}
+
+/*Background change for "Why trust us" ends*/
+
+/*Trying fade in on card START*/
+/* Scroll-triggered zoom-in */
+.zoom-in-on-scroll {
+  opacity: 0;
+  transform: scale(0.8); /* start smaller */
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.zoom-in-on-scroll.visible {
+  opacity: 1;
+  transform: scale(1); /* full size */
+}
+
+/*Trying fade in on Deployed card ENDS*/
+
+/*Trying fade in on card START*/
+.fade-in-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.fade-in-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*Trying fade in on card ENDS*/

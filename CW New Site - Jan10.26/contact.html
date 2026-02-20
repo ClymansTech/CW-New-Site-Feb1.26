@@ -57,7 +57,7 @@
 
     <link rel="shortcut icon" href="imgs/faviconICO.ico" type="image/x-icon" />
     <link rel="icon" href="imgs/faviconICO.ico" type="image/x-icon" />
-
+    <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -152,4 +152,476 @@
     </script>
     <!--Schema ends-->
   </head>
+  <body>
+    <!-- HEADER (same look/feel) -->
+    <header class="fixed-header">
+      <nav class="main-nav">
+        <div class="nav-container">
+          <a href="index.html" class="logo">
+            <img
+              src="imgs/tryinglogoForPop102.png"
+              alt="Icon"
+              class="logo-img"
+            />
+            CATAPULT<span class="brand-suffix">//WEBSITES</span>
+          </a>
+
+          <button class="nav-toggle" aria-label="open navigation">
+            <span class="hamburger"></span>
+          </button>
+
+          <ul class="nav-links">
+            <li><a href="index.html#problem">Risk Analysis</a></li>
+            <li><a href="index.html#spec-sheet">Landing</a></li>
+            <li><a href="index.html#full-website">Full-Website</a></li>
+
+            <li>
+              <span class="status-dot"></span>
+              <a href="contact.html" class="nav-btn">Deploy Now</a>
+            </li>
+
+            <li>
+              <a
+                href="https://facebook.com/catapultwebsites"
+                target="_blank"
+                class="social-link"
+                aria-label="Facebook"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-facebook"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="caution-strip"></div>
+    </header>
+
+    <!-- CONTACT HERO -->
+    <section id="hero">
+      <div class="container" data-aos="zoom-in" data-aos-duration="1800">
+        <div class="hero-grid" style="gap: 3rem">
+          <div class="hero-content">
+            <div class="hero-tag">CONTACT // REMOTE UPLINK</div>
+
+            <h1
+              style="
+                font-size: clamp(1.8rem, 6vw, 4.2rem);
+                line-height: 0.9;
+                margin-bottom: 1.5rem;
+              "
+            >
+              REQUEST A QUOTE.<br />
+              ASK A QUESTION.<br />
+              <span style="color: var(--solar-accent)">DEPLOY FAST.</span>
+            </h1>
+
+            <p
+              style="
+                font-size: 1.1rem;
+                color: #fff;
+                margin-bottom: 2.2rem;
+                max-width: 620px;
+              "
+            >
+              Fill out the form and we’ll get back to you with a clear plan and
+              next steps. No fluff. Just execution.
+            </p>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+              <a
+                class="btn"
+                href="tel:+15198098285"
+                style="justify-content: center"
+              >
+                Call Now
+              </a>
+              <a
+                class="btn"
+                href="mailto:adam@catapultwebsites.com"
+                style="
+                  background: transparent;
+                  color: #fff;
+                  border-color: #fff;
+                  box-shadow: none;
+                "
+              >
+                Email
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <img
+              src="imgs/roofingHeroPic.png"
+              alt="Contact Catapult Websites"
+              style="width: 100%; display: block; filter: brightness(0.8)"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM (ON PAGE) -->
+    <section id="contact-form">
+      <div class="container" data-aos="fade-up" data-aos-duration="900">
+        <div class="steel-frame" style="background: #000; padding: 2rem">
+          <!-- Terminal container uses your existing styles -->
+          <div class="terminal-container" style="margin: 0 auto">
+            <div class="status-led"></div>
+
+            <div class="tablet-screen" style="height: auto; max-height: none">
+              <form class="form-content" id="contactForm">
+                <input
+                  type="hidden"
+                  name="access_key"
+                  value="f6f7235b-29be-4dba-b89f-bbaca1028b5b"
+                />
+
+                <div class="caution-strip" style="margin-bottom: 1.2rem"></div>
+
+                <div
+                  class="header-with-logo"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 1rem;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <h2 style="margin: 0; font-size: 1.4rem">Remote Uplink</h2>
+                  <img
+                    src="imgs/tryinglogoForPop.png"
+                    alt="Logo"
+                    class="popup-logo"
+                    style="height: 72px; width: auto"
+                  />
+                </div>
+
+                <p style="margin: 0 0 1rem; opacity: 0.75">
+                  Submit details below. We’ll respond ASAP.
+                </p>
+
+                <!-- Name -->
+                <label for="name">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Name"
+                  autocomplete="name"
+                />
+
+                <!-- Email -->
+                <label for="emailField">Email</label>
+                <input
+                  id="emailField"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="Email Address"
+                  required
+                />
+                <span
+                  class="error-message"
+                  id="emailError"
+                  style="
+                    display: none;
+                    color: #da291c;
+                    font-size: 12px;
+                    margin-top: 4px;
+                  "
+                >
+                  Please enter a valid email address.
+                </span>
+
+                <!-- Phone -->
+                <label for="phone">Phone (optional)</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  autocomplete="tel"
+                  type="tel"
+                  placeholder="Phone (e.g. 519-238-1321)"
+                />
+
+                <!-- Business -->
+                <label for="business">Describe Your Business</label>
+                <textarea
+                  id="business"
+                  name="business"
+                  rows="4"
+                  placeholder="Type here..."
+                ></textarea>
+
+                <!-- Project Type -->
+                <fieldset class="project-type" style="margin-top: 1rem">
+                  <legend
+                    style="
+                      color: var(--solar-primary);
+                      letter-spacing: 2px;
+                      font-size: 0.65rem;
+                      font-weight: 900;
+                    "
+                  >
+                    Select Project Type:
+                  </legend>
+
+                  <label class="radio-card">
+                    <input
+                      type="radio"
+                      name="project"
+                      value="landing-page"
+                      checked
+                    />
+                    <span>Landing Page</span>
+                  </label>
+
+                  <label class="radio-card">
+                    <input type="radio" name="project" value="full-website" />
+                    <span>Full Website</span>
+                  </label>
+                </fieldset>
+
+                <button type="submit" class="submit-btn">SEND</button>
+
+                <!-- Result message -->
+                <div
+                  id="resultMsg"
+                  style="
+                    margin-top: 12px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    text-align: center;
+                  "
+                ></div>
+              </form>
+            </div>
+          </div>
+
+          <div class="caution-strip" style="margin-top: 2rem"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP + CONTACT DETAILS -->
+    <section id="map">
+      <div class="container" data-aos="fade-up" data-aos-duration="900">
+        <div class="spec-header" style="margin-bottom: 2.5rem">
+          <h2>Find <span class="accent">Us</span></h2>
+          <p style="max-width: 760px; margin: 0 auto">
+            Serving Chatham-Kent &amp; Southern Ontario. Remote builds
+            available.
+          </p>
+        </div>
+
+        <div class="steel-frame" style="background: #000; padding: 1.25rem">
+          <div
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem"
+          >
+            <div style="padding: 1.5rem">
+              <h3 style="margin-bottom: 1rem">Direct Line</h3>
+              <p style="margin-bottom: 0.75rem; color: #fff; font-weight: 700">
+                Phone:
+                <a
+                  href="tel:+15198098285"
+                  style="color: var(--solar-primary); text-decoration: none"
+                >
+                  +1 (519) 809-8285
+                </a>
+              </p>
+              <p style="margin-bottom: 0.75rem; color: #fff; font-weight: 700">
+                Email:
+                <a
+                  href="mailto:adam@catapultwebsites.com"
+                  style="color: var(--solar-primary); text-decoration: none"
+                >
+                  adam@catapultwebsites.com
+                </a>
+              </p>
+              <p style="opacity: 0.8">
+                If you want, include your service area + what kind of jobs you
+                want more of (repairs, full replacements, commercial, etc.).
+              </p>
+            </div>
+
+            <div style="border: 2px solid rgba(16, 185, 129, 0.25)">
+              <!-- Replace src with your final embed when ready -->
+              <iframe
+                title="Catapult Websites Map"
+                src="https://www.google.com/maps?q=Chatham-Kent%20Ontario&output=embed"
+                width="100%"
+                height="360"
+                style="border: 0; display: block"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        /* quick mobile stack for map grid (scoped to this page) */
+        @media (max-width: 900px) {
+          #map .steel-frame > div {
+            grid-template-columns: 1fr !important;
+          }
+          #map iframe {
+            height: 320px !important;
+          }
+        }
+      </style>
+    </section>
+
+    <!-- FOOTER (same vibe; simplified) -->
+    <footer
+      id="contact"
+      style="
+        padding: 5rem 1.5rem;
+        text-align: center;
+        border-top: 4px solid var(--industrial-steel);
+        color: #fff;
+      "
+    >
+      <div class="container">
+        <h2 style="font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 2rem">
+          READY TO OUTWORK THE
+          <span style="color: var(--solar-primary)">COMPETITION?</span>
+        </h2>
+
+        <div
+          style="
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+          "
+        >
+          <a href="tel:+15198098285" class="btn" style="justify-content: center"
+            >Call</a
+          >
+          <a
+            href="mailto:adam@catapultwebsites.com"
+            class="btn"
+            style="
+              background: transparent;
+              color: #fff;
+              border-color: #fff;
+              box-shadow: none;
+            "
+          >
+            Email
+          </a>
+        </div>
+
+        <div style="margin-top: 2rem">
+          <div class="caution-strip" style="margin-bottom: 2rem"></div>
+
+          <p
+            style="
+              margin: 0;
+              opacity: 0.35;
+              font-size: 0.75rem;
+              letter-spacing: 3px;
+            "
+          >
+            © 2026 CATAPULT WEBSITES // BUILT FOR THE TRADES
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- SCRIPTS (minimal: nav + form + AOS) -->
+    <script>
+      /* =========================
+       NAVIGATION
+    ========================== */
+      const navToggle = document.querySelector(".nav-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      if (navToggle && navLinks) {
+        navToggle.addEventListener("click", () => {
+          navLinks.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-links a").forEach((link) => {
+          link.addEventListener("click", () => {
+            navLinks.classList.remove("active");
+          });
+        });
+      }
+
+      /* =========================
+       EMAIL VALIDATION
+    ========================== */
+      function validateEmail() {
+        const emailInput = document.getElementById("emailField");
+        const errorMsg = document.getElementById("emailError");
+        const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+
+        if (!emailPattern.test(emailInput.value)) {
+          errorMsg.style.display = "block";
+          return false;
+        } else {
+          errorMsg.style.display = "none";
+          return true;
+        }
+      }
+
+      /* =========================
+       FORM SUBMISSION (Web3Forms)
+    ========================== */
+      const contactForm = document.getElementById("contactForm");
+      const resultMsg = document.getElementById("resultMsg");
+
+      if (contactForm) {
+        contactForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!validateEmail()) return;
+
+          const formData = new FormData(contactForm);
+          const json = JSON.stringify(Object.fromEntries(formData));
+
+          resultMsg.textContent = "Processing Uplink...";
+          resultMsg.style.color = "#999";
+
+          try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: json,
+            });
+
+            const res = await response.json();
+
+            if (response.status === 200) {
+              resultMsg.textContent =
+                "SUCCESS: Transmission received. We’ll be in contact shortly.";
+              resultMsg.style.color = "#00ff00";
+              contactForm.reset();
+            } else {
+              resultMsg.textContent =
+                "ERROR: " + (res.message || "Submission failed.");
+              resultMsg.style.color = "red";
+            }
+          } catch (err) {
+            console.error(err);
+            resultMsg.textContent = "CONNECTION FAILED.";
+            resultMsg.style.color = "red";
+          }
+        });
+      }
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
 </html>
