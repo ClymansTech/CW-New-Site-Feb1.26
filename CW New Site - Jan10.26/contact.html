@@ -177,7 +177,7 @@
 
             <li>
               <span class="status-dot"></span>
-              <a href="contact.html" class="nav-btn">Deploy Now</a>
+              <a href="contact.html#contact-form" class="nav-btn">Deploy Now</a>
             </li>
 
             <li>
@@ -224,7 +224,7 @@
                 max-width: 620px;
               "
             >
-              Fill out the form and we’ll get back to you with a clear plan and
+              Fill out the form and we'll get back to you with a clear plan and
               next steps. No fluff. Just execution.
             </p>
 
@@ -558,17 +558,16 @@
        EMAIL VALIDATION
     ========================== */
       function validateEmail() {
-        const emailInput = document.getElementById("contactEmailField");
+        const emailInput = document.getElementById("contactEmail");
         const errorMsg = document.getElementById("contactEmailError");
-        const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!emailPattern.test(emailInput.value)) {
-          errorMsg.style.display = "block";
-          return false;
-        } else {
-          errorMsg.style.display = "none";
-          return true;
-        }
+        const val = (emailInput?.value || "").trim(); // <-- IMPORTANT
+
+        const ok = emailPattern.test(val);
+
+        if (errorMsg) errorMsg.style.display = ok ? "none" : "block";
+        return ok;
       }
 
       /* =========================
