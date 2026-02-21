@@ -314,9 +314,9 @@
                 />
 
                 <!-- Email -->
-                <label for="emailField">Email</label>
+                <label for="contactEmail">Email</label>
                 <input
-                  id="emailField"
+                  id="contactEmail"
                   name="email"
                   type="email"
                   autocomplete="email"
@@ -325,7 +325,7 @@
                 />
                 <span
                   class="error-message"
-                  id="emailError"
+                  id="contactEmailError"
                   style="
                     display: none;
                     color: #da291c;
@@ -558,8 +558,8 @@
        EMAIL VALIDATION
     ========================== */
       function validateEmail() {
-        const emailInput = document.getElementById("emailField");
-        const errorMsg = document.getElementById("emailError");
+        const emailInput = document.getElementById("contactEmailField");
+        const errorMsg = document.getElementById("contactEmailError");
         const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
 
         if (!emailPattern.test(emailInput.value)) {
@@ -602,7 +602,7 @@
 
             if (response.status === 200) {
               resultMsg.textContent =
-                "SUCCESS: Transmission received. We’ll be in contact shortly.";
+                "SUCCESS: Transmission received. We'll be in contact shortly.";
               resultMsg.style.color = "#00ff00";
               contactForm.reset();
             } else {

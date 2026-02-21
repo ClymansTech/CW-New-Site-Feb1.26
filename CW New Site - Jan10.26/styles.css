@@ -2363,3 +2363,98 @@ textarea {
 }
 
 /*Trying fade in on card ENDS*/
+/* =========================================================
+   CONTACT FORM — SMALL SCREEN OVERFLOW FIX
+   (Targets ONLY #contact-form)
+========================================================= */
+@media (max-width: 480px) {
+  /* Make sure nothing causes sideways scrolling */
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Reduce section padding on tiny devices */
+  #contact-form {
+    padding: 4.5rem 1rem;
+  }
+
+  /* Containers: prevent overflow */
+  #contact-form .container,
+  #contact-form .steel-frame,
+  #contact-form .terminal-container,
+  #contact-form .tablet-screen,
+  #contact-form form {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* The #1 offender on tiny screens: thick border + big shadow */
+  #contact-form .steel-frame {
+    border-width: 6px; /* was 12px */
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.6); /* smaller shadow */
+  }
+
+  /* Inline padding on the steel frame (you used style="padding: 2rem") */
+  #contact-form .steel-frame {
+    padding: 1rem !important;
+  }
+
+  /* Terminal shell */
+  #contact-form .terminal-container {
+    padding: 1rem !important;
+  }
+
+  /* Screen border + content padding */
+  #contact-form .tablet-screen {
+    border-width: 6px !important; /* was 8px */
+    overflow-x: hidden; /* kill any inner horizontal scroll */
+  }
+
+  #contact-form .form-content {
+    padding: 1rem !important; /* was 35px */
+  }
+
+  /* Header row stacks */
+  #contact-form .header-with-logo {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.6rem !important;
+  }
+
+  /* Inputs: keep iOS from zooming + ensure fit */
+  #contact-form input,
+  #contact-form textarea {
+    font-size: 16px; /* prevents iOS zoom */
+    width: 100%;
+  }
+
+  /* Radio cards: stack full width */
+  #contact-form .project-type {
+    display: grid;
+    gap: 10px;
+  }
+
+  #contact-form .radio-card {
+    width: 100%;
+    margin-right: 0 !important;
+    justify-content: flex-start;
+  }
+
+  /* Button: full width */
+  #contact-form .submit-btn {
+    width: 100%;
+    padding: 16px;
+  }
+
+  /* Status LED can drift on small screens */
+  #contact-form .status-led {
+    right: 16px !important;
+    top: 16px !important;
+  }
+}
+/* =========================================================
+   CONTACT FORM — SMALL SCREEN OVERFLOW FIX
+   (Targets ONLY #contact-form) ENDs
+========================================================= */
