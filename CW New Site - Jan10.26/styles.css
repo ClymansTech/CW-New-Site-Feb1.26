@@ -2463,3 +2463,7 @@ textarea {
    CONTACT FORM — SMALL SCREEN OVERFLOW FIX
    (Targets ONLY #contact-form) ENDs
 ========================================================= */
+footer a {
+  text-decoration: none;
+  color: var(--solar-accent);
+}
