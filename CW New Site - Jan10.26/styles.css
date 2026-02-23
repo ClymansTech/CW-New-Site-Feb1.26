@@ -2471,3 +2471,7 @@ footer a {
 #contact-form {
   padding-top: 0;
 }
+
+#landingPageTitle {
+  color: var(--solar-accent);
+}
