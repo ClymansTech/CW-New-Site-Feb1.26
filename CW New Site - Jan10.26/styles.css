@@ -74,7 +74,7 @@ section {
 }
 
 #imgHeroContact {
-  margin-top: -144px;
+  margin-top: 0px;
 }
 
 .container {
@@ -136,7 +136,7 @@ section {
   font-weight: 900;
   display: inline-block;
   margin-bottom: 1.5rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 /*Trying hero img background*/
@@ -144,6 +144,7 @@ section {
 #hero {
   position: relative;
   overflow: hidden;
+  padding-bottom: 100px;
 }
 
 /* Background image (very subtle) */
@@ -643,7 +644,7 @@ section {
 
 @media (max-width: 421px) {
   .logo {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
 }
 /* 1. OVERLAY & DYNAMIC PADDING */
