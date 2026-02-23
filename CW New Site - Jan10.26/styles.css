@@ -147,6 +147,13 @@ section {
   padding-bottom: 100px;
 }
 
+#heroContact {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100px;
+  padding-top: 5rem;
+}
+
 /* Background image (very subtle) */
 #hero::before {
   content: "";
@@ -609,6 +616,7 @@ section {
   .nav-links.active {
     opacity: 1;
     visibility: visible;
+    top: 120px;
   }
 
   .nav-links li {
