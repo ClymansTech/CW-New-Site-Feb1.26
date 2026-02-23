@@ -410,6 +410,10 @@ section {
   transition: var(--transition);
 }
 
+.nav-links a.is-active {
+  color: var(--solar-primary);
+}
+
 .nav-links a:hover {
   color: var(--solar-primary);
   transform: translateY(-1px);
