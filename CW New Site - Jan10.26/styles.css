@@ -2472,6 +2472,6 @@ footer a {
   padding-top: 0;
 }
 
-#landingPageTitle {
+.solarAccent {
   color: var(--solar-accent);
 }
