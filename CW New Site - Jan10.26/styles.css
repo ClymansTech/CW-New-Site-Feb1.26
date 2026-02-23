@@ -61,7 +61,7 @@ h2 {
 section {
   padding: 10rem 1.5rem;
   position: relative;
-  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+
   /* Slight transparency to show the blueprint grid through the section */
   background: rgba(2, 6, 23, 0.9);
 }
@@ -2487,10 +2487,12 @@ footer a {
   padding-top: 0;
 }
 
+/*Setting color for Contact info on footer*/
 .solarAccent {
   color: var(--solar-accent);
 }
 
+/*Changing style for Contact page form selections*/
 .radio-card input[type="radio"]:checked + span {
   display: inline-flex;
   align-items: center;
@@ -2507,4 +2509,9 @@ footer a {
 
 .radio-card span {
   display: inline-block;
+}
+
+/**/
+#map {
+  padding-top: 1px;
 }
