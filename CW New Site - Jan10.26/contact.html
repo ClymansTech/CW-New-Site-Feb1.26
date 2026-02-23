@@ -184,11 +184,12 @@
             <li><a href="index.html#spec-sheet">Landing</a></li>
             <li><a href="index.html#full-website">Full-Website</a></li>
             <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html#contact-form">Contact</a></li>
 
-            <li>
+            <!--li>
               <span class="status-dot"></span>
               <a href="contact.html#contact-form" class="nav-btn">Deploy Now</a>
-            </li>
+            </li-->
 
             <li>
               <a
@@ -682,6 +683,18 @@
           }
         });
       }
+
+      // Highlight current page in nav
+      const currentPage = location.pathname.split("/").pop() || "index.html";
+
+      document.querySelectorAll(".nav-links a").forEach((a) => {
+        const href = a.getAttribute("href") || "";
+        const linkPage = href.split("#")[0].split("/").pop(); // handles "index.html#section"
+
+        if (linkPage && linkPage === currentPage) {
+          a.classList.add("is-active");
+        }
+      });
     </script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
