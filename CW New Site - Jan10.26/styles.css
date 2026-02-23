@@ -1886,6 +1886,7 @@ textarea {
   margin: 15px 0;
   font-size: 14px;
   color: #668;
+  height: 120px;
 }
 
 .project-type label {
@@ -1896,6 +1897,7 @@ textarea {
 
 .project-type input[type="radio"] {
   margin-right: 8px;
+  display: none;
 }
 
 /* ==============================
@@ -2487,4 +2489,22 @@ footer a {
 
 .solarAccent {
   color: var(--solar-accent);
+}
+
+.radio-card input[type="radio"]:checked + span {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 12px;
+  padding: 10px 15px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  background-color: #00ff00;
+  color: #fff;
+}
+
+.radio-card span {
+  display: inline-block;
 }
