@@ -1136,6 +1136,7 @@ textarea {
 @media (max-width: 900px) {
   .price-plate {
     text-align: center;
+    display: block;
   }
 
   .price-right {
