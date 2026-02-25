@@ -714,9 +714,9 @@ section {
     border-radius: 35px;
     max-width: 100%;
   }
-  .tablet-screen {
-    height: 65vh !important; /* Slightly shorter screen for mobile phones */
-  }
+  /*.tablet-screen {
+    height: 65vh !important; 
+  }*/
   .form-content {
     padding: 20px 15px !important; /* Less internal padding so text doesn't squish */
   }
@@ -768,7 +768,7 @@ section {
 }
 
 label {
-  display: block;
+  /*display: block;*/
   margin-top: 15px;
   font-size: 11px;
   font-weight: 800;
@@ -1140,6 +1140,7 @@ textarea {
 
   .price-right {
     text-align: center;
+    margin-inline: auto;
   }
 }
 
@@ -1750,7 +1751,7 @@ label {
   background: #000;
   border-radius: 6px;
   border: 8px solid #0a0a0a;
-  height: 70vh;
+  /*height: 70vh;*/
   max-height: 550px;
   overflow-y: auto;
   animation: powerOn 1.4s ease-out forwards;
@@ -1773,7 +1774,7 @@ label {
   }
 }
 
-/* 5. FORM CONTENT */
+/* FORM CONTENT */
 .form-content {
   padding: 35px;
   font-family: "Segoe UI", sans-serif;
@@ -1871,9 +1872,9 @@ textarea {
     border-radius: 35px;
     max-width: 100%;
   }
-  .tablet-screen {
+  /*.tablet-screen {
     height: 65vh !important;
-  }
+  }*/
   .form-content {
     padding: 20px 15px !important;
   }
@@ -2491,6 +2492,7 @@ footer a {
 /*Setting color for Contact info on footer*/
 .solarAccent {
   color: var(--solar-accent);
+  font-weight: bold;
 }
 
 /*Changing style for Contact page form selections*/
